@@ -22,10 +22,10 @@ jobs:
         run: |
           if [[ "${{ github.event.head_commit.message }}" == *"Enroll"* ]]; then
             echo "Contains 'Enroll'"
-            echo "DEPLOY=true" >> $GITHUB_ENV
+            echo "::set-output name=deploy::true"
           else
             echo "Does not contain 'Enroll'"
-            echo "deploy=false" >> $GITHUB_ENV
+            echo "::set-output name=deploy::false"
           fi
 
   terraform:
