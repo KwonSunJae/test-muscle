@@ -22,16 +22,16 @@ jobs:
         run: |
           if [[ "${{ github.event.head_commit.message }}" == *"Enroll"* ]]; then
             echo "Contains 'Enroll'"
-            echo "::set-output name=deploy::true"
+            echo "DEPLOY=true" >> $GITHUB_ENV
           else
             echo "Does not contain 'Enroll'"
-            echo "::set-output name=deploy::false"
+            echo "DEPLOY=false" >> $GITHUB_ENV
           fi
 
   terraform:
     runs-on: ubuntu-latest
     needs: check_commit_message
-    if: needs.check_commit_message.outputs.deploy == 'true'
+    if: env.DEPLOY == 'true'
 
     steps:
       - name: Checkout code
