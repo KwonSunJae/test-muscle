@@ -51,6 +51,12 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
         working-directory: ./test-terraform
+        env:
+          TF_VAR_CTRL_URL: ${{ secrets.TF_VAR_CTRL_URL }}
+          TF_VAR_USER_NAME: ${{ secrets.TF_VAR_USER_NAME }}
+          TF_VAR_USER_PW: ${{ secrets.TF_VAR_USER_PW }}
+          TF_VAR_TENANT_NAME: ${{ secrets.TF_VAR_TENANT_NAME }}
+
 
       - name: Commit tfstate file
         run: |
